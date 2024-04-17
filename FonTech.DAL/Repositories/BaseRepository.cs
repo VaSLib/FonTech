@@ -18,7 +18,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
             throw new ArgumentNullException("Entity is null");
         }
 
-        _dbContext.AddAsync(entity);
+        _dbContext.Add(entity);
         _dbContext.SaveChanges();
 
         return Task.FromResult(entity);
