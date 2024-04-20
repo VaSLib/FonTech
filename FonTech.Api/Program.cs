@@ -2,11 +2,15 @@ using FonTech.DAL.DependencyInjection;
 using FonTech.Application.DependencyInjection;
 using Serilog;
 using FonTech.Api;
+using FonTech.Domain.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSection));
+
 builder.Services.AddControllers();
 
+builder.Services.AddAuthenticationAndAuthorization(builder);
 builder.Services.AddSwagger();
 
 

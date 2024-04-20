@@ -71,7 +71,7 @@ public class ReportService : IReportService
     }
 
     ///<inheritdoc/>
-    public  Task<BaseResult<ReportDto>> GetReportByIdAsync(long id)
+    public async Task<BaseResult<ReportDto>> GetReportByIdAsync(long id)
     {
         ReportDto? report;
 
@@ -85,24 +85,24 @@ public class ReportService : IReportService
         catch (Exception ex)
         {
             _logger.Error(ex, ex.Message);
-            return Task.FromResult(new BaseResult<ReportDto>()
+            return new BaseResult<ReportDto>()
             {
                 ErrorMessage = ErrorMessage.InternalServerError,
                 ErrorCode = (int)ErrorCodes.InternalServerError,
-            });
+            };
         }
 
         if (report == null)
         {
             _logger.Warning($"Отчет с {id} не найден", id);
-            return Task.FromResult(new BaseResult<ReportDto>()
+            return new BaseResult<ReportDto>()
             {
                 ErrorMessage = ErrorMessage.ReportNotFound,
                 ErrorCode = (int)ErrorCodes.ReportNotFound,
-            });
+            };
         }
 
-        return Task.FromResult(new BaseResult<ReportDto> { Data = report });
+        return new BaseResult<ReportDto> { Data = report };
     }
 
 
