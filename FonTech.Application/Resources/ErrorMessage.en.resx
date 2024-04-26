@@ -147,4 +147,13 @@
   <data name="InvalidClientRequest" xml:space="preserve">
     <value>Invalid User Request</value>
   </data>
+  <data name="RoleAlreadyExists" xml:space="preserve">
+    <value>Role Already Exists</value>
+  </data>
+  <data name="RoleNotFound" xml:space="preserve">
+    <value>Role Not Found</value>
+  </data>
+  <data name="UserAlreadyExistsThisRole" xml:space="preserve">
+    <value>User Already Exists ThisRole</value>
+  </data>
 </root>
