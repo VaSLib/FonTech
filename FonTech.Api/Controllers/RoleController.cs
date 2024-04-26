@@ -1,5 +1,6 @@
 ﻿using FonTech.Application.Services;
 using FonTech.Domain.Dto.Role;
+using FonTech.Domain.Dto.UserRole;
 using FonTech.Domain.Entity;
 using FonTech.Domain.Interfaces.Services;
 using FonTech.Domain.Result;
@@ -126,6 +127,38 @@ public class RoleController : ControllerBase
     public async Task<ActionResult<BaseResult<Role>>> AddRoleForUser([FromBody] UserRoleDto dto)
     {
         var response = await _roleService.AddForUserAsync(dto);
+        if (response.IsSuccess)
+        {
+            return Ok(response);
+        }
+        return BadRequest(response);
+    }
+
+
+    /// <summary>
+    /// Удаление роли у пользователя
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
+    [HttpDelete("deleteRole")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BaseResult<Role>>> DeleteRoleForUser([FromBody] DeleteUserRoleDto dto)
+    {
+        var response = await _roleService.DeleteForUserAsync(dto);
+        if (response.IsSuccess)
+        {
+            return Ok(response);
+        }
+        return BadRequest(response);
+    }
+
+    [HttpPut("updateRole")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BaseResult<Role>>> UpdateRoleForUser([FromBody] UpdateUserRoleDto dto)
+    {
+        var response = await _roleService.UpdateForUserAsync(dto);
         if (response.IsSuccess)
         {
             return Ok(response);
